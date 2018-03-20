@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "947182695131",
+    "firebase_url": "https://paddysassignment-d44dc.firebaseio.com",
+    "project_id": "paddysassignment-d44dc",
+    "storage_bucket": "paddysassignment-d44dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947182695131:android:b3ca9acd350001ac",
+        "android_client_info": {
+          "package_name": "com.example.apple.paddysassignmentbookstore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947182695131-vhn43gd86vfn8f1sinks9l6tqac6buuo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYNW44ydPKKpvTfuu-bviwVqjZRiNRH8o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
