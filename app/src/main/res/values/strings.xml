@@ -35,4 +35,7 @@
     <string name="enter_date_of_birth_dd_mm_yyyy">Enter Date of Birth (DD/MM/YYYY)</string>
     <string name="enter_your_card_number">Enter Your Card Number</string>
     <string name="submit">Submit</string>
+    <string name="textview">TextView</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="todo">TODO</string>
 </resources>

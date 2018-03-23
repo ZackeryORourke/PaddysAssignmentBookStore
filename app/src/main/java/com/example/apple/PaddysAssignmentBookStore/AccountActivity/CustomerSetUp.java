@@ -35,6 +35,7 @@ public class CustomerSetUp extends AppCompatActivity {
         final EditText addressField = (EditText) findViewById(R.id.address);
         final EditText dobField = (EditText) findViewById(R.id.dob);
         final EditText paymentField = (EditText) findViewById(R.id.payment);
+        final Spinner mySpinner=(Spinner) findViewById(R.id.cardTypeSpinner);
         Button submitButton= (Button) findViewById(R.id.buttonSubmit);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,9 +43,10 @@ public class CustomerSetUp extends AppCompatActivity {
                 String address      =  addressField.getText().toString();
                 String dob      =  dobField.getText().toString();
                 String payment     =  paymentField.getText().toString();
+                String cardTypeSpinner = mySpinner.getSelectedItem().toString();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("CustomerInformation" + FirebaseAuth.getInstance().getUid());
-                myRef.setValue(address+dob+ payment);
+                myRef.setValue(address+dob+ payment+cardTypeSpinner);
                 startActivity(new Intent(CustomerSetUp.this, SearchBook.class));
             }
         });
