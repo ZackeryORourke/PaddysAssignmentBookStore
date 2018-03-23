@@ -30,4 +30,9 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="email_id">Email ID</string>
+    <string name="title_activity_customer_set_up">CustomerSetUp</string>
+    <string name="enter_address">Enter Address</string>
+    <string name="enter_date_of_birth_dd_mm_yyyy">Enter Date of Birth (DD/MM/YYYY)</string>
+    <string name="enter_your_card_number">Enter Your Card Number</string>
+    <string name="submit">Submit</string>
 </resources>

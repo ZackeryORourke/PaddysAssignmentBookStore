@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.apple.PaddysAssignment.AccountActivity.Login">
+    tools:context="com.example.apple.PaddysAssignmentBookStore.AccountActivity.Login">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -15,14 +15,15 @@
         android:padding="@dimen/activity_horizontal_margin">
 
 
-        <ImageView
-            android:layout_width="@dimen/logo_w_h"
-            android:layout_height="@dimen/logo_w_h"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
-            android:src="@mipmap/ic_launcher"
-            android:contentDescription=""
-            tools:ignore="ContentDescription" />
+        <Switch
+            android:id="@+id/accountType"
+            android:layout_width="290dp"
+            android:layout_height="102dp"
+            android:text="Account Type"
+            android:textColor="@android:color/holo_red_dark"
+            android:textOff="Admin Account"
+            android:textOn="User Account"
+            android:textSize="24sp" />
 
 
         <EditText

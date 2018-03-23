@@ -58,7 +58,19 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:background="@color/colorAccent"
-            android:text="@string/action_sign_in_short"
+            android:text="Register As Customer"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/sign_up_buttonDeveloper"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/colorAccent"
+            android:text="Register As Developer"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 

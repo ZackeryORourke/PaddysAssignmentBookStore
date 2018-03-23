@@ -7,8 +7,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.example.apple.PaddysAssignmentBookStore.LoginActivity;
@@ -17,13 +19,22 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class Login extends AppCompatActivity {
+public class Login extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset;
+    Switch switch1;
+    boolean switched;
+
+
 
 
     @Override
@@ -32,6 +43,12 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login2);
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
+        switch1 = (Switch) findViewById(R.id.accountType);
+        switch1.setOnCheckedChangeListener(this);
+        if (switch1 != null) {
+            switch1.setOnCheckedChangeListener(this);
+        }
+
 
         if (auth.getCurrentUser() != null) {
             startActivity(new Intent(Login.this, LoginActivity.class));
@@ -81,6 +98,9 @@ public class Login extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
+
+
+
                 //authenticate user
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
@@ -98,13 +118,38 @@ public class Login extends AppCompatActivity {
                                         Toast.makeText(Login.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(Login.this, LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    if(switched=true){
+                                        Intent intent = new Intent(Login.this,CustomerSetUp.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }else
+                                    {
+                                        Intent intent = new Intent(Login.this,CustomerSetUp.class);
+                                        startActivity(intent);
+                                        finish();
+
+
+                                    }
+//                                   Intent intent = new Intent(Login.this,CustomerSetUp.class);
+//                                   startActivity(intent);
+//                                   finish();
+
                                 }
                             }
                         });
             }
         });
+    }
+
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if(switch1.isChecked()){
+            switched = true;
+        }
+        else{
+            switched= false;
+        }
+
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="20dp"
+    >
+
+
+    <EditText
+        android:id="@+id/address"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:ems="10"
+        android:hint="@string/enter_address"
+        android:inputType="textPostalAddress" />
+
+    <EditText
+        android:id="@+id/dob"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:ems="10"
+        android:hint="@string/enter_date_of_birth_dd_mm_yyyy"
+        android:inputType="date" />
+
+    <Spinner
+        android:id="@+id/cardTypeSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@android:drawable/btn_dropdown"
+        android:spinnerMode="dropdown"/>
+
+    <EditText
+        android:id="@+id/payment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/enter_your_card_number"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:text="@string/submit" />
+
+</LinearLayout>

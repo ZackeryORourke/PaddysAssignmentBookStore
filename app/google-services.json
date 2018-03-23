@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "947182695131-dpsi707q6c4h7vsfuh1aj4up50f6jquo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.apple.paddysassignmentbookstore",
+            "certificate_hash": "255b650303f9b1502958c2e75bd0ee5cea21291e"
+          }
+        },
+        {
           "client_id": "947182695131-vhn43gd86vfn8f1sinks9l6tqac6buuo.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947182695131-vhn43gd86vfn8f1sinks9l6tqac6buuo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
