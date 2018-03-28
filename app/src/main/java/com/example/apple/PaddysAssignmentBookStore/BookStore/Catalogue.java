@@ -6,11 +6,23 @@ package com.example.apple.PaddysAssignmentBookStore.BookStore;
 
 public class Catalogue {
 
+    private String id;
     private String title;
     private String author;
-    private double price;
+    private String price;
     private String category;
     private String imageUrl;
+
+    public Catalogue(){
+
+    };
+
+    public Catalogue(String id, String title, String author, String price) {
+        this.id = id;
+        this.title = title;
+        this.author= author;
+        this.price = price;
+    }
 
     public String getTitle() {
         return title;
@@ -28,11 +40,11 @@ public class Catalogue {
         this.author = author;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
