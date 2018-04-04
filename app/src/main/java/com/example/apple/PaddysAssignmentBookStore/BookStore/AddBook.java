@@ -1,15 +1,20 @@
 package com.example.apple.PaddysAssignmentBookStore.BookStore;
 
+import android.app.Dialog;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.apple.PaddysAssignment.R;
@@ -57,6 +62,16 @@ public class AddBook extends AppCompatActivity {
             }
         });
 
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Catalogue catalogue = catalogueListItems.get(i);
+                showUpdateDialog(catalogue.getTitle(),catalogue.getAuthor(),catalogue.getPrice());
+
+                return false;
+            }
+        });
+
     }
 
 
@@ -73,14 +88,71 @@ public class AddBook extends AppCompatActivity {
             databaseCatalogue.child(id).setValue(catalogue);
             Toast.makeText(this,"The Book Has Been Added",Toast.LENGTH_LONG).show();
 
-
-
         }else{
             Toast.makeText(this,"Please Fill Out All Text Fields",Toast.LENGTH_LONG).show();
         }
 
     }
 
+    private void showUpdateDialog(final String bookId, final String bookName, final String bookAuthor){
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);//pass the current context
+        LayoutInflater layoutInflater = getLayoutInflater();
+
+        final View dialogView = layoutInflater.inflate(R.layout.updatedialog,null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editText= (EditText) dialogView.findViewById(R.id.editTextName);
+        final EditText editText1= (EditText) dialogView.findViewById(R.id.editTextAuthor);
+        final EditText editText2= (EditText) dialogView.findViewById(R.id.editTextPrice);
+        final Button  button= (Button) dialogView.findViewById(R.id.buttonUpdate);
+
+
+        dialogBuilder.setTitle("Updating Book" + bookId);
+
+
+        AlertDialog alertDialog = dialogBuilder.create();
+
+        alertDialog.show();
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String id = editText.getText().toString().trim();
+                String title = editText.getText().toString().trim();
+                String author = editText1.getText().toString().trim();
+                String price = editText2.getText().toString().trim();
+
+
+
+                updateCatalogue(id,title,author,price);
+
+
+            }
+
+
+
+
+
+
+
+
+
+        });
+
+
+
+
+    }
+
+    private boolean updateCatalogue(String bookId, String bookName, String bookAuthor, String bookPrice){
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("catalogues").child(bookId);
+        Catalogue catalogue = new Catalogue(bookId,bookName,bookAuthor,bookPrice);
+        databaseReference.setValue(catalogue);
+        Toast.makeText(this,"Book Updated Successfully",Toast.LENGTH_LONG).show();
+        return true;
+
+    }
 
 
     @Override
@@ -98,7 +170,7 @@ public class AddBook extends AppCompatActivity {
                 }
 
                 BookListAdapter adapter = new BookListAdapter(AddBook.this, catalogueListItems);
-                listView.setAdapter(adapter);  //it does not know what this adabpter is
+                listView.setAdapter(adapter);  //it does not know what this adapter is
             }
 
             @Override
