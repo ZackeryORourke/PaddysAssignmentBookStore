@@ -7,31 +7,141 @@
 
 
     <RelativeLayout
-        android:layout_width="380dp"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="4dp">
+        android:layout_width="786dp"
+        android:layout_height="273dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.152">
 
         <TextView
             android:id="@+id/listViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true" />
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/listViewCategory"
+            android:layout_marginTop="17dp"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/listViewAuthor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="42dp" />
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/listViewCategory"
+            android:layout_alignBottom="@+id/listViewCategory"
+            android:layout_centerHorizontal="true"
+            android:padding="10dp"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/listViewCategory"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@+id/imageView"
+            android:padding="10dp"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/listViewPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true" />
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/listViewQnt"
+            android:layout_alignBottom="@+id/listViewQnt"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="14dp"
+            app:srcCompat="@drawable/book" />
+
+        <EditText
+            android:id="@+id/listViewQuantity"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_marginStart="63dp"
+            android:layout_toEndOf="@+id/listViewAuthor"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Quantity" />
+
+        <TextView
+            android:id="@+id/listViewQnt"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignStart="@+id/listViewQuantity"
+            android:padding="10dp"
+            android:textSize="20sp"
+            tools:layout_editor_absoluteX="404dp"
+            tools:layout_editor_absoluteY="200dp" />
+
+        <EditText
+            android:id="@+id/Title"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/listViewQuantity"
+            android:layout_alignBottom="@+id/listViewQuantity"
+            android:layout_alignParentEnd="true"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Price"
+            tools:layout_editor_absoluteX="580dp"
+            tools:layout_editor_absoluteY="141dp" />
+
+        <EditText
+            android:id="@+id/editText4"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/Title"
+            android:layout_alignBottom="@+id/Title"
+            android:layout_centerHorizontal="true"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Author" />
 
 
     </RelativeLayout>
+
 
 </android.support.constraint.ConstraintLayout>

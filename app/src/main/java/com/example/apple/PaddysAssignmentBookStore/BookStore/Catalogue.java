@@ -12,16 +12,28 @@ public class Catalogue {
     private String price;
     private String category;
     private String imageUrl;
+    private String quantity;
+
 
     public Catalogue(){
 
     };
 
-    public Catalogue(String id, String title, String author, String price) {
+    public Catalogue(String id, String title, String author, String price, String quantity, String category) {
         this.id = id;
         this.title = title;
         this.author= author;
         this.price = price;
+        this.quantity = quantity;
+        this.category = category;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
     public String getTitle() {

@@ -44,13 +44,16 @@ public class BookListAdapter extends ArrayAdapter<Catalogue>{
         TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.listViewTitle);
         TextView textViewAuthor = (TextView) listViewItem.findViewById(R.id.listViewAuthor);
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.listViewPrice);
+        TextView textViewQuantity = (TextView) listViewItem.findViewById(R.id.listViewQnt);
+        TextView textViewCategory= (TextView) listViewItem.findViewById(R.id.listViewCategory);
 
         Catalogue catalogue = catalogueList.get(position);
 
         textViewTitle.setText(catalogue.getTitle());
         textViewAuthor.setText(catalogue.getAuthor());
         textViewPrice.setText(catalogue.getPrice());
-
+        textViewQuantity.setText(catalogue.getQuantity());
+        textViewCategory.setText(catalogue.getCategory());
         return listViewItem;
     }
 
