@@ -44,6 +44,12 @@ public class AdminMenu extends AppCompatActivity {
                 this.startActivity(userIntent2);
                 return true;
 
+            case R.id.customerView:
+                Intent customerView = new Intent(this, MainFeed.class);
+                this.startActivity(customerView);
+                return true;
+
+
 
 
 

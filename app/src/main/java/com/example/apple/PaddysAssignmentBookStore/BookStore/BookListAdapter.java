@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.apple.PaddysAssignment.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -37,23 +38,25 @@ public class BookListAdapter extends ArrayAdapter<Catalogue>{
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater  = context.getLayoutInflater();
-
-
-
         View listViewItem = inflater.inflate(R.layout.list_layout,null,true);
         TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.listViewTitle);
         TextView textViewAuthor = (TextView) listViewItem.findViewById(R.id.listViewAuthor);
         TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.listViewPrice);
         TextView textViewQuantity = (TextView) listViewItem.findViewById(R.id.listViewQnt);
         TextView textViewCategory= (TextView) listViewItem.findViewById(R.id.listViewCategory);
-
+        ImageView imageView = (ImageView) listViewItem.findViewById(R.id.imageView);
         Catalogue catalogue = catalogueList.get(position);
-
+        String url = (catalogue.getImageUrl());
+        Picasso.with(context)
+                .load(url)
+                .resize(200, 200)
+                .into(imageView);
         textViewTitle.setText(catalogue.getTitle());
         textViewAuthor.setText(catalogue.getAuthor());
         textViewPrice.setText(catalogue.getPrice());
         textViewQuantity.setText(catalogue.getQuantity());
         textViewCategory.setText(catalogue.getCategory());
+
         return listViewItem;
     }
 

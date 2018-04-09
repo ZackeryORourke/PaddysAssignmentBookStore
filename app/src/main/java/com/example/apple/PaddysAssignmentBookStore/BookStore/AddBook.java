@@ -153,10 +153,11 @@ public class AddBook extends AppCompatActivity {
         String author = authorText.getText().toString().trim();
         String price = priceText.getText().toString().trim();
         String quantity = quantityText.getText().toString().trim();
+        String imageLocation = filePath.toString();
         final Spinner mySpinner=(Spinner) findViewById(R.id.topicSpinner);
         String topicSpinner = mySpinner.getSelectedItem().toString();
         if(!TextUtils.isEmpty(title)&!TextUtils.isEmpty(author)&!TextUtils.isEmpty(price)){
-            Catalogue catalogue = new Catalogue(id,title,author,price,quantity,topicSpinner);
+            Catalogue catalogue = new Catalogue(id,title,author,price,quantity,topicSpinner,imageLocation);
             databaseCatalogue.child(id).setValue(catalogue);
             uploadImage();
             Toast.makeText(this,"The Book Has Been Added",Toast.LENGTH_LONG).show();
@@ -200,8 +201,8 @@ public class AddBook extends AppCompatActivity {
                 String price = editText2.getText().toString().trim();
                 String updateQuantity = editText3.getText().toString().trim();
                 String updateCategory = editText4.getText().toString().trim();
-                String imageLocation = editText2.getText().toString().trim();
-                updateCatalogue(id,title,author,price,updateQuantity,updateCategory);
+                String imageLocation = filePath.toString();
+                updateCatalogue(id,title,author,price,updateQuantity,updateCategory,imageLocation);
                 alertDialog.dismiss();
 
 
@@ -262,9 +263,9 @@ public class AddBook extends AppCompatActivity {
         }
     }
 
-    private boolean updateCatalogue(String bookId, String bookName, String bookAuthor, String bookPrice,String bookQuantity, String bookCategory){
+    private boolean updateCatalogue(String bookId, String bookName, String bookAuthor, String bookPrice,String bookQuantity, String bookCategory,String imageLocation){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("catalogues").child(bookId);
-        Catalogue catalogue = new Catalogue(bookId,bookName,bookAuthor,bookPrice, bookQuantity, bookCategory);
+        Catalogue catalogue = new Catalogue(bookId,bookName,bookAuthor,bookPrice, bookQuantity, bookCategory,imageLocation);
         uploadImage();
         databaseReference.setValue(catalogue);
         Toast.makeText(this,"Book Updated Successfully",Toast.LENGTH_LONG).show();
@@ -346,6 +347,3 @@ public class AddBook extends AppCompatActivity {
 
 }
 
-
-//Image help
-//https://code.tutsplus.com/tutorials/image-upload-to-firebase-in-android-application--cms-29934

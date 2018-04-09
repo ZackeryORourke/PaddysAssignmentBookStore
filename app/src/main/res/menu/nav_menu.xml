@@ -12,5 +12,10 @@
         android:title="My Profile"
         />
 
+    <item
+        android:id="@+id/customerView"
+        android:title="Customer View"
+        />
+
 
 </menu>

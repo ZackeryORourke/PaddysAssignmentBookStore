@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.apple.PaddysAssignment.R;
 import com.example.apple.PaddysAssignmentBookStore.AccountActivity.Login;
+import com.example.apple.PaddysAssignmentBookStore.AccountActivity.MainFeed;
 import com.example.apple.PaddysAssignmentBookStore.AccountActivity.RegisterActivity;
 import com.example.apple.PaddysAssignmentBookStore.BookStore.AddBook;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -242,6 +243,13 @@ public class LoginActivity extends AppCompatActivity {
                 Intent userIntent2 = new Intent(this, AddBook.class);
                 this.startActivity(userIntent2);
                 return true;
+
+
+            case R.id.customerView:
+                Intent customerView = new Intent(this, MainFeed.class);
+                this.startActivity(customerView);
+                return true;
+
 
 
 
