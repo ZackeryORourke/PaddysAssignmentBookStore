@@ -11,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,8 +26,13 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.apple.PaddysAssignment.R;
+import com.example.apple.PaddysAssignmentBookStore.BookStore.AddBook;
 import com.example.apple.PaddysAssignmentBookStore.BookStore.BookListAdapter;
 import com.example.apple.PaddysAssignmentBookStore.BookStore.Catalogue;
+import com.example.apple.PaddysAssignmentBookStore.BookStore.CustomerIndex;
+import com.example.apple.PaddysAssignmentBookStore.BookStore.SearchBook;
+import com.example.apple.PaddysAssignmentBookStore.BookStore.UserShoppingCart;
+import com.example.apple.PaddysAssignmentBookStore.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -45,18 +53,14 @@ import java.util.UUID;
 public class MainFeed extends AppCompatActivity {
 
 
-    EditText titleText, authorText, priceText, quantityText;
-    Button addButton, uploadImageButton, clearButton;
+
+
     private List<Catalogue> catalogueListItems = new ArrayList<Catalogue>();
     DatabaseReference databaseCatalogue;
     private ListView listView;
     private List<Catalogue> booksList = new ArrayList<>();
     private BookListAdapter adapter;
     private ImageView imageView;
-    private Uri filePath;
-    private final int PICK_IMAGE_REQUEST = 71;
-
-
 
 
 
@@ -65,72 +69,147 @@ public class MainFeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainfeed);
         listView = (ListView) findViewById(R.id.mainList);
-        databaseCatalogue = FirebaseDatabase.getInstance().getReference("catalogues");
-        titleText = (EditText) findViewById(R.id.addtitle);
-        quantityText = (EditText) findViewById(R.id.quantity);
-        authorText = (EditText) findViewById(R.id.addAuthor);
-        priceText = (EditText) findViewById(R.id.addPrice);
-        addButton = (Button) findViewById(R.id.addBookButton);
-        clearButton= (Button)findViewById(R.id.clearBook);
-        uploadImageButton =(Button) findViewById(R.id.uploadBook);
+
         adapter = new BookListAdapter(this, catalogueListItems);
         listView.setAdapter((ListAdapter) adapter);
         imageView = (ImageView) findViewById(R.id.imgView);
 
+        mainFeed();;
 
-    }
-
-
-
-
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-                && data != null && data.getData() != null )
-        {
-            filePath = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                imageView.setImageBitmap(bitmap);
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        databaseCatalogue.addValueEventListener(new ValueEventListener() {
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                catalogueListItems.clear();
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                for (DataSnapshot catalogueSnapshot: dataSnapshot.getChildren()){
-                    Catalogue catalogue = catalogueSnapshot.getValue(Catalogue.class);
+                Intent i = new Intent(MainFeed.this, CustomerIndex.class);
+                i.putExtra("ValueKey", catalogueListItems.get(position).getTitle());
+                i.putExtra("ValueKey2",catalogueListItems.get(position).getAuthor());
+                i.putExtra("ValueKey3", catalogueListItems.get(position).getCategory());
+                i.putExtra("ValueKey4", catalogueListItems.get(position).getImageUrl());
+                i.putExtra("ValueKey5", catalogueListItems.get(position).getPrice());
+                i.putExtra("ValueKey6", catalogueListItems.get(position).getQuantity());
 
-                    catalogueListItems.add(catalogue);
-                }
 
-                BookListAdapter adapter = new BookListAdapter(MainFeed.this, catalogueListItems);
-                listView.setAdapter(adapter);  //it does not know what this adapter is
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+                startActivity(i);
 
             }
         });
+
+
+
     }
 
+
+
+
+
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
+//                && data != null && data.getData() != null )
+//        {
+//            filePath = data.getData();
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+//                imageView.setImageBitmap(bitmap);
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//
+
+
+//    protected void mainFeed() {
+//
+//        databaseCatalogue.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                catalogueListItems.clear();
+//
+//                for (DataSnapshot catalogueSnapshot: dataSnapshot.getChildren()){
+//                    Catalogue catalogue = catalogueSnapshot.getValue(Catalogue.class);
+//
+//                    catalogueListItems.add(catalogue);
+//                }
+//
+//                BookListAdapter adapter = new BookListAdapter(MainFeed.this, catalogueListItems);
+//                listView.setAdapter(adapter);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
+
+    public void mainFeed(){
+
+        databaseCatalogue = FirebaseDatabase.getInstance().getReference("catalogues");
+        ValueEventListener valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot books : dataSnapshot.getChildren()) {
+                    Catalogue catalogue = books.getValue(Catalogue.class);
+
+                    catalogueListItems.add(catalogue);
+                    listView.setAdapter(adapter);
+
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+
+        databaseCatalogue.addListenerForSingleValueEvent(valueEventListener);
+    }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.nav_menu, menu);
+        return true;
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        switch (item.getItemId()){
+
+
+
+
+
+            case R.id.searchView:
+                Intent search = new Intent(this, SearchBook.class);
+                this.startActivity(search);
+                return true;
+
+
+
+            case R.id.shoppingCart:
+                Intent shoppingCart = new Intent(this, UserShoppingCart.class);
+                this.startActivity(shoppingCart);
+                return true;
+
+
+
+
+
+
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 
