@@ -28,6 +28,9 @@
         <activity android:name="com.example.apple.PaddysAssignmentBookStore.AccountActivity.AdminMenu" />
         <activity android:name="com.example.apple.PaddysAssignmentBookStore.AccountActivity.MainFeed" />
         <activity android:name="com.example.apple.PaddysAssignmentBookStore.BookStore.AddBook" />
+        <activity android:name="com.example.apple.PaddysAssignmentBookStore.BookStore.CustomerIndex" />
+        <activity android:name="com.example.apple.PaddysAssignmentBookStore.BookStore.SearchBook" />
+        <activity android:name="com.example.apple.PaddysAssignmentBookStore.BookStore.UserShoppingCart"></activity>
     </application>
 
 </manifest>

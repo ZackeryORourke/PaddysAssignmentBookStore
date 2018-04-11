@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,15 +19,14 @@ import java.util.List;
 
 public class BookListAdapter extends ArrayAdapter<Catalogue>{
 
-    private Activity context;
-    private List<Catalogue> catalogueList;
     private Activity activity;
+    private List<Catalogue> catalogueList;
     private LayoutInflater inflater;
 
 
-    public BookListAdapter(Activity context, List<Catalogue> catalogueList){
-      super(context, R.layout.list_layout,catalogueList);
-      this.context = context;
+    public BookListAdapter(Activity activity, List<Catalogue> catalogueList){
+      super(activity, R.layout.list_layout,catalogueList);
+      this.activity = activity;
       this.catalogueList = catalogueList;
   }
 
@@ -37,19 +35,31 @@ public class BookListAdapter extends ArrayAdapter<Catalogue>{
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater  = context.getLayoutInflater();
-        View listViewItem = inflater.inflate(R.layout.list_layout,null,true);
-        TextView textViewTitle = (TextView) listViewItem.findViewById(R.id.listViewTitle);
-        TextView textViewAuthor = (TextView) listViewItem.findViewById(R.id.listViewAuthor);
-        TextView textViewPrice = (TextView) listViewItem.findViewById(R.id.listViewPrice);
-        TextView textViewQuantity = (TextView) listViewItem.findViewById(R.id.listViewQnt);
-        TextView textViewCategory= (TextView) listViewItem.findViewById(R.id.listViewCategory);
-        ImageView imageView = (ImageView) listViewItem.findViewById(R.id.imageView);
+
+
+        if(inflater== null)
+            inflater = (LayoutInflater) activity
+            .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if(convertView==null)
+            convertView = inflater.inflate(R.layout.list_layout,null);
+
+
+
+
+        TextView textViewTitle = (TextView) convertView.findViewById(R.id.listViewTitle);
+        TextView textViewAuthor = (TextView) convertView.findViewById(R.id.listViewAuthor);
+        TextView textViewPrice = (TextView) convertView.findViewById(R.id.listViewPrice);
+        TextView textViewQuantity = (TextView) convertView.findViewById(R.id.listViewQnt);
+        TextView textViewCategory= (TextView) convertView.findViewById(R.id.listViewCategory);
         Catalogue catalogue = catalogueList.get(position);
+        ImageView imageView = (ImageView) convertView.findViewById(R.id.bookImageView);
+
         String url = (catalogue.getImageUrl());
-        Picasso.with(context)
+        Picasso.with(activity)
                 .load(url)
-                .resize(200, 200)
+                .placeholder(R.drawable.book)
+               // .resize(200, 200)
                 .into(imageView);
         textViewTitle.setText(catalogue.getTitle());
         textViewAuthor.setText(catalogue.getAuthor());
@@ -57,7 +67,7 @@ public class BookListAdapter extends ArrayAdapter<Catalogue>{
         textViewQuantity.setText(catalogue.getQuantity());
         textViewCategory.setText(catalogue.getCategory());
 
-        return listViewItem;
+        return convertView;
     }
 
 

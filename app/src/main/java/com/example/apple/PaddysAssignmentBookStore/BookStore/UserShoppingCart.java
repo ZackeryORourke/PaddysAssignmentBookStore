@@ -9,14 +9,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import com.example.apple.PaddysAssignment.R;
 import com.example.apple.PaddysAssignmentBookStore.LoginActivity;
 import com.google.firebase.database.DataSnapshot;
@@ -24,12 +21,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-
 public class UserShoppingCart extends AppCompatActivity {
 
 
@@ -123,13 +117,6 @@ public class UserShoppingCart extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
 
         switch (item.getItemId()){
-
-            case R.id.userMenu:
-                Intent userIntent = new Intent(this, LoginActivity.class);
-                this.startActivity(userIntent);
-                return true;
-
-
 
 
             case R.id.searchView:

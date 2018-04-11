@@ -1,6 +1,7 @@
 package com.example.apple.PaddysAssignmentBookStore.BookStore;
 
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -53,6 +55,7 @@ public class AddBook extends AppCompatActivity {
     private ImageView imageView;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
+    private String downloadUrl;
 
 
 
@@ -148,23 +151,7 @@ public class AddBook extends AppCompatActivity {
     }
 
     private void addBook(){
-        String id = titleText.getText().toString().trim();
-        String title = titleText.getText().toString().trim();
-        String author = authorText.getText().toString().trim();
-        String price = priceText.getText().toString().trim();
-        String quantity = quantityText.getText().toString().trim();
-        String imageLocation = filePath.toString();
-        final Spinner mySpinner=(Spinner) findViewById(R.id.topicSpinner);
-        String topicSpinner = mySpinner.getSelectedItem().toString();
-        if(!TextUtils.isEmpty(title)&!TextUtils.isEmpty(author)&!TextUtils.isEmpty(price)){
-            Catalogue catalogue = new Catalogue(id,title,author,price,quantity,topicSpinner,imageLocation);
-            databaseCatalogue.child(id).setValue(catalogue);
-            uploadImage();
-            Toast.makeText(this,"The Book Has Been Added",Toast.LENGTH_LONG).show();
-
-        }else{
-            Toast.makeText(this,"Please Fill Out All Text Fields",Toast.LENGTH_LONG).show();
-        }
+        uploadImage();
 
     }
 
@@ -205,7 +192,6 @@ public class AddBook extends AppCompatActivity {
                 updateCatalogue(id,title,author,price,updateQuantity,updateCategory,imageLocation);
                 alertDialog.dismiss();
 
-
             }
 
 
@@ -234,8 +220,6 @@ public class AddBook extends AppCompatActivity {
         });
 
 
-
-
     }
 
     private void chooseImage() {
@@ -255,6 +239,7 @@ public class AddBook extends AppCompatActivity {
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
                 imageView.setImageBitmap(bitmap);
+
             }
             catch (IOException e)
             {
@@ -263,10 +248,11 @@ public class AddBook extends AppCompatActivity {
         }
     }
 
+
     private boolean updateCatalogue(String bookId, String bookName, String bookAuthor, String bookPrice,String bookQuantity, String bookCategory,String imageLocation){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("catalogues").child(bookId);
         Catalogue catalogue = new Catalogue(bookId,bookName,bookAuthor,bookPrice, bookQuantity, bookCategory,imageLocation);
-        uploadImage();
+        updateImage();
         databaseReference.setValue(catalogue);
         Toast.makeText(this,"Book Updated Successfully",Toast.LENGTH_LONG).show();
         return true;
@@ -274,26 +260,39 @@ public class AddBook extends AppCompatActivity {
     }
 
     private void uploadImage() {
-
         //Firebase
         FirebaseStorage storage;
         StorageReference storageReference;
-
         if(filePath != null)
         {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
-
             storage = FirebaseStorage.getInstance();
             storageReference = storage.getReference();
-
-
             StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            filePath=downloadUri;
+                            String id = titleText.getText().toString().trim();
+                            String title = titleText.getText().toString().trim();
+                            String author = authorText.getText().toString().trim();
+                            String price = priceText.getText().toString().trim();
+                            String quantity = quantityText.getText().toString().trim();
+                            String imageLocation = filePath.toString();
+                            final Spinner mySpinner=(Spinner) findViewById(R.id.topicSpinner);
+                            String topicSpinner = mySpinner.getSelectedItem().toString();
+                            if(!TextUtils.isEmpty(title)&!TextUtils.isEmpty(author)&!TextUtils.isEmpty(price)){
+                                Catalogue catalogue = new Catalogue(id,title,author,price,quantity,topicSpinner,imageLocation);
+                                databaseCatalogue.child(id).setValue(catalogue);
+
+
+                            }
+
+
                             progressDialog.dismiss();
                             Toast.makeText(AddBook.this, "Uploaded", Toast.LENGTH_SHORT).show();
                         }
@@ -313,6 +312,53 @@ public class AddBook extends AppCompatActivity {
                             progressDialog.setMessage("Uploaded "+(int)progress+"%");
                         }
                     });
+
+
+
+
+        }
+    }
+
+    private void updateImage() {
+        //Firebase
+        FirebaseStorage storage;
+        StorageReference storageReference;
+        if (filePath != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setTitle("Uploading...");
+            progressDialog.show();
+            storage = FirebaseStorage.getInstance();
+            storageReference = storage.getReference();
+            StorageReference ref = storageReference.child("images/" + UUID.randomUUID().toString());
+            ref.putFile(filePath)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Uri downloadUri = taskSnapshot.getDownloadUrl();
+                            filePath = downloadUri;
+
+
+                            progressDialog.dismiss();
+                            Toast.makeText(AddBook.this, "Uploaded", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            progressDialog.dismiss();
+                            Toast.makeText(AddBook.this, "Failed " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot
+                                    .getTotalByteCount());
+                            progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                        }
+                    });
+
+
         }
     }
 

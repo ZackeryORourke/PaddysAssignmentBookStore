@@ -31,10 +31,7 @@ public class AdminMenu extends AppCompatActivity {
 
         switch (item.getItemId()){
 
-            case R.id.userMenu:
-                Intent userIntent = new Intent(this, LoginActivity.class);
-                this.startActivity(userIntent);
-                return true;
+
 
 
 

@@ -222,7 +222,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.nav_menu, menu);
+        inflater.inflate(R.menu.adminnavmenu, menu);
         return true;
     }
 
@@ -230,11 +230,6 @@ public class LoginActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
 
         switch (item.getItemId()){
-
-            case R.id.userMenu:
-                Intent userIntent = new Intent(this, LoginActivity.class);
-                this.startActivity(userIntent);
-                return true;
 
 
 

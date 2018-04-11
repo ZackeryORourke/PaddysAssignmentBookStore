@@ -7,17 +7,10 @@
         />
 
 
-
     <item
-        android:id="@+id/searchView"
-        android:title="Search Book"
+        android:id="@+id/customerView"
+        android:title="Customer View"
         />
 
-
-
-    <item
-        android:id="@+id/shoppingCart"
-        android:title="Shopping Cart"
-        />
 
 </menu>
