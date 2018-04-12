@@ -142,16 +142,30 @@ public class AddBook extends AppCompatActivity {
 
     }
 
+
+    //Singleton Pattern Introduced for file extension
+
+    public String UrlExtension(Uri uri) {
+
+        ContentResolver contentResolver = getContentResolver();
+
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri)) ;
+
+    }
+
     public void clearDetails(){
             titleText.setText("");
             authorText.setText("");
            priceText.setText("");
            quantityText.setText("");
 
+
     }
 
     private void addBook(){
-        uploadImage();
+        bookDetails();
 
     }
 
@@ -259,7 +273,7 @@ public class AddBook extends AppCompatActivity {
 
     }
 
-    private void uploadImage() {
+    private void bookDetails() {
         //Firebase
         FirebaseStorage storage;
         StorageReference storageReference;
@@ -270,7 +284,7 @@ public class AddBook extends AppCompatActivity {
             progressDialog.show();
             storage = FirebaseStorage.getInstance();
             storageReference = storage.getReference();
-            StorageReference ref = storageReference.child("images/"+ UUID.randomUUID().toString());
+            StorageReference ref = storageReference.child("images/").child(System.currentTimeMillis()+"," + UrlExtension(filePath));
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
