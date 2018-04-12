@@ -17,9 +17,9 @@ public class Catalogue {
 
     public Catalogue(){
 
-    };
+    }
 
-    public Catalogue(String id, String title, String author, String price, String quantity, String category,String imageUrl) {
+    public Catalogue( String id, String title, String author, String price, String quantity, String category,String imageUrl) {
         this.id = id;
         this.title = title;
         this.author= author;
@@ -27,6 +27,8 @@ public class Catalogue {
         this.quantity = quantity;
         this.category = category;
         this.imageUrl= imageUrl;
+
+
     }
 
     public String getQuantity() {

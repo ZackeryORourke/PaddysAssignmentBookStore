@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.apple.PaddysAssignment.R;
 import com.example.apple.PaddysAssignmentBookStore.AccountActivity.MainFeed;
 import com.google.firebase.auth.FirebaseAuth;
@@ -54,6 +55,7 @@ public class CustomerIndex extends AppCompatActivity {
         final String bookImage = intent.getExtras().getString("ValueKey4");
         final String bookPrice = intent.getExtras().getString("ValueKey5");
         final String bookQuantity = intent.getExtras().getString("ValueKey6");
+        final ImageView image = (ImageView) findViewById(R.id.bookImageView);
         title = (TextView) findViewById(R.id.listViewTitle);
         author = (TextView) findViewById(R.id.listViewAuthor);
         category = (TextView) findViewById(R.id.listViewCategory);
@@ -66,12 +68,12 @@ public class CustomerIndex extends AppCompatActivity {
         category.setText(bookCategory);
         price.setText(bookPrice);
         quantity.setText(bookQuantity);
-        final ImageView image = (ImageView) findViewById(R.id.bookImageView);
-        Picasso.with(this)
-                .load(bookImage)
-                .placeholder(R.drawable.common_google_signin_btn_icon_dark_normal_background) // optional
-                .error(R.drawable.common_full_open_on_phone)         // optional
 
+
+
+        Glide.with(this)
+                .load(bookImage)
+                .override(300, 200)
                 .into(image);
 
         mAuth = FirebaseAuth.getInstance();
@@ -119,6 +121,40 @@ public class CustomerIndex extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.nav_menu, menu);
         return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+
+        switch (item.getItemId()){
+
+
+
+
+
+            case R.id.searchView:
+                Intent search = new Intent(this, SearchBook.class);
+                this.startActivity(search);
+                return true;
+
+
+
+            case R.id.shoppingCart:
+                Intent shoppingCart = new Intent(this, UserShoppingCart.class);
+                this.startActivity(shoppingCart);
+                return true;
+
+
+
+
+
+
+
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 

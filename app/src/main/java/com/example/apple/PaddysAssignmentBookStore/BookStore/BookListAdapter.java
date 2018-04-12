@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.apple.PaddysAssignment.R;
 import com.squareup.picasso.Picasso;
 
@@ -47,6 +48,7 @@ public class BookListAdapter extends ArrayAdapter<Catalogue>{
 
 
 
+
         TextView textViewTitle = (TextView) convertView.findViewById(R.id.listViewTitle);
         TextView textViewAuthor = (TextView) convertView.findViewById(R.id.listViewAuthor);
         TextView textViewPrice = (TextView) convertView.findViewById(R.id.listViewPrice);
@@ -56,11 +58,12 @@ public class BookListAdapter extends ArrayAdapter<Catalogue>{
         ImageView imageView = (ImageView) convertView.findViewById(R.id.bookImageView);
 
         String url = (catalogue.getImageUrl());
-        Picasso.with(activity)
+        Glide.with(activity)
                 .load(url)
-                .placeholder(R.drawable.book)
-               // .resize(200, 200)
+                .override(300, 200)
                 .into(imageView);
+
+
         textViewTitle.setText(catalogue.getTitle());
         textViewAuthor.setText(catalogue.getAuthor());
         textViewPrice.setText(catalogue.getPrice());

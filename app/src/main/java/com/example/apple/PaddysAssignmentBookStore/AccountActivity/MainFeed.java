@@ -47,6 +47,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,6 +63,7 @@ public class MainFeed extends AppCompatActivity {
     private List<Catalogue> booksList = new ArrayList<>();
     private BookListAdapter adapter;
     private ImageView imageView;
+    private Button searchTitle, searchAuthor, searchPrice;
 
 
 
@@ -69,12 +72,56 @@ public class MainFeed extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainfeed);
         listView = (ListView) findViewById(R.id.mainList);
-
         adapter = new BookListAdapter(this, catalogueListItems);
         listView.setAdapter((ListAdapter) adapter);
         imageView = (ImageView) findViewById(R.id.imgView);
+        searchTitle= (Button) findViewById(R.id.sortTitle);
+        searchAuthor= (Button) findViewById(R.id.sortAuthorButton);
+        searchPrice= (Button) findViewById(R.id.sortPrice);
 
-        mainFeed();;
+        mainFeed();
+
+        searchTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(catalogueListItems, new Comparator<Catalogue>() {
+                    @Override
+                    public int compare(Catalogue catalogue, Catalogue c1) {
+                        return catalogue.getTitle().compareTo(c1.getTitle());
+                    }
+                });
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        searchAuthor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(catalogueListItems, new Comparator<Catalogue>() {
+                    @Override
+                    public int compare(Catalogue catalogue, Catalogue c1) {
+                        return catalogue.getAuthor().compareTo(c1.getAuthor());
+                    }
+                });
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+
+        searchPrice.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Collections.sort(catalogueListItems, new Comparator<Catalogue>() {
+                    @Override
+                    public int compare(Catalogue catalogue, Catalogue c1) {
+                        return catalogue.getPrice().compareTo(c1.getPrice());
+                    }
+                });
+
+                adapter.notifyDataSetChanged();
+            }
+        });
 
         listView.setClickable(true);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,56 +144,12 @@ public class MainFeed extends AppCompatActivity {
 
 
 
+
+
     }
 
 
 
-
-
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK
-//                && data != null && data.getData() != null )
-//        {
-//            filePath = data.getData();
-//            try {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-//                imageView.setImageBitmap(bitmap);
-//            }
-//            catch (IOException e)
-//            {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-
-
-//    protected void mainFeed() {
-//
-//        databaseCatalogue.addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(DataSnapshot dataSnapshot) {
-//                catalogueListItems.clear();
-//
-//                for (DataSnapshot catalogueSnapshot: dataSnapshot.getChildren()){
-//                    Catalogue catalogue = catalogueSnapshot.getValue(Catalogue.class);
-//
-//                    catalogueListItems.add(catalogue);
-//                }
-//
-//                BookListAdapter adapter = new BookListAdapter(MainFeed.this, catalogueListItems);
-//                listView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
 
     public void mainFeed(){
 

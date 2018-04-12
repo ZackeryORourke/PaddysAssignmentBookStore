@@ -7,6 +7,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import com.example.apple.PaddysAssignment.R;
 import com.google.firebase.database.DataSnapshot;
@@ -15,6 +17,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class SearchBook extends AppCompatActivity {
 
@@ -27,6 +31,7 @@ public class SearchBook extends AppCompatActivity {
     ArrayList<String> quantityList;
     ArrayList<String> imageUrlList;
     MySearchAdapter searchAdapter;
+    Button searchTitle, searchAuthor, searchPrice;
 
 
     @Override
@@ -41,13 +46,30 @@ public class SearchBook extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-
         titleList = new ArrayList<>();
         authorList = new ArrayList<>();
         categoryList = new ArrayList<>();
         priceList = new ArrayList<>();
         imageUrlList = new ArrayList<>();
         quantityList = new ArrayList<>();
+
+        searchTitle= (Button) findViewById(R.id.sortTitle);
+        searchAuthor= (Button) findViewById(R.id.sortAuthor);
+        searchPrice= (Button) findViewById(R.id.sortPrice);
+
+//        searchTitle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Collections.sort(titleList, new Comparator<Titlea>() {
+//                    @Override
+//                    public int compare(Catalogue catalogue, catalgoue c) {
+//                        return catalogue.getTitle().compareTo(c.getTitle());
+//                    }
+//                });
+//
+//                adapter.notifyDataSetChanged();
+//            }
+//        });
 
         searchTextField.addTextChangedListener(new TextWatcher() {
             @Override

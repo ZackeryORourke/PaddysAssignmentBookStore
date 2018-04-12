@@ -15,6 +15,24 @@
         android:hint="@string/search_title"
         android:textSize="30sp" />
 
+    <Button
+        android:id="@+id/sortTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort TItle A-Z " />
+
+    <Button
+        android:id="@+id/sortAuthor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort Author A-Z" />
+
+    <Button
+        android:id="@+id/sortPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sort By Price" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/myRecyclerView"
         android:layout_width="match_parent"

@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.152">
+        app:layout_constraintVertical_bias="0.154">
 
         <TextView
             android:id="@+id/listViewTitle"
@@ -29,49 +29,49 @@
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/listViewCategory"
             android:layout_marginTop="17dp"
-            android:padding="10dp"
-            android:textSize="20sp"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
+            android:padding="10dp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/listViewAuthor"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_alignBaseline="@+id/listViewCategory"
             android:layout_alignBottom="@+id/listViewCategory"
             android:layout_centerHorizontal="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:padding="10dp"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/listViewCategory"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignBottom="@+id/bookImageView"
             android:layout_marginStart="20dp"
             android:layout_toEndOf="@+id/bookImageView"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:padding="10dp"
             android:textSize="20sp" />
 
         <TextView
             android:id="@+id/listViewPrice"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignBaseline="@+id/listViewQnt"
             android:layout_alignBottom="@+id/listViewQnt"
             android:layout_alignParentEnd="true"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:padding="10dp"
             android:textSize="20sp" />
 
@@ -80,17 +80,15 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="14dp"
-           />
+            android:layout_marginTop="14dp" />
 
         <EditText
             android:id="@+id/listViewQuantity"
             android:layout_width="100dp"
-            android:layout_height="50dp"
-            android:layout_alignBaseline="@+id/listViewTitle"
-            android:layout_alignBottom="@+id/listViewTitle"
-            android:layout_marginStart="45dp"
-            android:layout_toEndOf="@+id/listViewAuthor"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/listViewQnt"
+            android:layout_marginTop="46dp"
             android:clickable="false"
             android:ems="10"
             android:focusable="false"
@@ -100,13 +98,14 @@
 
         <TextView
             android:id="@+id/listViewQnt"
+            android:layout_width="95dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="171dp"
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignBottom="@+id/bookImageView"
-            android:layout_alignStart="@+id/listViewQuantity"
             android:padding="10dp"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="404dp"
@@ -114,15 +113,15 @@
 
         <EditText
             android:id="@+id/Title"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_alignBaseline="@+id/listViewQuantity"
             android:layout_alignBottom="@+id/listViewQuantity"
             android:layout_alignParentEnd="true"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="textPersonName"
             android:text="@string/price"
             tools:layout_editor_absoluteX="580dp"
@@ -130,20 +129,16 @@
 
         <EditText
             android:id="@+id/editText4"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
             android:layout_width="100dp"
             android:layout_height="50dp"
-            android:layout_alignBaseline="@+id/Title"
-            android:layout_alignBottom="@+id/Title"
+            android:layout_alignTop="@+id/listViewQuantity"
             android:layout_centerHorizontal="true"
+            android:clickable="false"
             android:ems="10"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:inputType="textPersonName"
             android:text="Author" />
-
-
-
 
 
     </RelativeLayout>
