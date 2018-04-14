@@ -6,12 +6,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.example.apple.PaddysAssignment.R;
+import com.example.apple.PaddysAssignmentBookStore.AccountActivity.MainFeed;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +27,8 @@ import java.util.List;
 public class UserShoppingCart extends AppCompatActivity {
 
 
-    EditText titleText, authorText, priceText, quantityText;
-    Button addButton, uploadImageButton, clearButton;
+
+    Button purchaseButton;
     TextView totalText;
     private List<Catalogue> catalogueListItems = new ArrayList<>();
     DatabaseReference databaseCatalogue;
@@ -32,28 +37,63 @@ public class UserShoppingCart extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_shopping_cart);
         listView = findViewById(R.id.shoppingCartList);
-        titleText = findViewById(R.id.addTitle);
-        quantityText = findViewById(R.id.quantity);
-        authorText = findViewById(R.id.addAuthor);
-        priceText = findViewById(R.id.addPrice);
-        totalText = findViewById(R.id.finalTotal);
-        addButton = findViewById(R.id.addBookButton);
-        clearButton= findViewById(R.id.clearBook);
-        uploadImageButton = findViewById(R.id.uploadBook);
+        purchaseButton= findViewById(R.id.purchaseButton);
         adapter = new BookListAdapter(this, catalogueListItems);
         listView.setAdapter(adapter);
         shoppingListFeed();
+
+        purchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //This needs to simulate a purchase
+                //Builder pattern? Object creation software design pattern
+                String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                databaseCatalogue = FirebaseDatabase.getInstance().getReference("shoppingCart").child(user);
+                databaseCatalogue.removeValue();
+
+                //Add the info to purchase history
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Purchase History").child(user);
+                databaseReference.setValue("Test Amount");
+
+                Toast.makeText(UserShoppingCart.this, "Your purchase is complete", Toast.LENGTH_SHORT).show();
+
+
+                backToFeed();
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+
+
+        });
+
 
 
 
     }
 
 
+
+    public void backToFeed(){
+        Intent k = new Intent(this, MainFeed.class);
+        startActivity(k);
+    }
 
     public void shoppingListFeed(){
 
