@@ -7,6 +7,7 @@
     tools:context="com.example.apple.PaddysAssignmentBookStore.BookStore.AddBook">
 
     <EditText
+        android:hint="@string/price"
         android:id="@+id/addPrice"
         android:layout_width="126dp"
         android:layout_height="57dp"
@@ -32,7 +33,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="monospace"
-        android:text="Long Press Any Book In List To Update Or Delete"
+        android:text="@string/long_press_any_book_in_list_to_update_or_delete"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:textSize="18sp"
@@ -65,15 +66,15 @@
         app:layout_constraintVertical_bias="0.037"
         tools:text="Books" />
 
-    <TextView
+    <EditText
         android:id="@+id/titleTV"
         android:layout_width="103dp"
-        android:layout_height="29dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Book Title"
+        android:hint="@string/book_title"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -86,7 +87,8 @@
 
 
     <EditText
-        android:id="@+id/addtitle"
+        android:id="@+id/addTitle"
+        android:hint="Title"
         android:layout_width="106dp"
         android:layout_height="53dp"
         android:layout_marginBottom="8dp"
@@ -105,6 +107,7 @@
 
     <EditText
         android:id="@+id/addAuthor"
+        android:hint="@string/author"
         android:layout_width="109dp"
         android:layout_height="55dp"
         android:layout_marginBottom="8dp"
@@ -121,15 +124,15 @@
         app:layout_constraintVertical_bias="0.222" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/authorTV"
-        android:layout_width="113dp"
-        android:layout_height="29dp"
+        android:layout_width="121dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Book Author"
+        android:hint="@string/book_author"
         android:inputType="text"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -142,17 +145,17 @@
         app:layout_constraintVertical_bias="0.142" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/topicTV"
         android:layout_width="125dp"
-        android:layout_height="24dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Book Price"
+        android:hint="@string/book_price"
         android:inputType="numberDecimal"
-        android:text="Topic"
+        android:text="@string/topic"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -164,17 +167,17 @@
         app:layout_constraintVertical_bias="0.142" />
 
 
-    <TextView
+    <EditText
         android:id="@+id/priceTV2"
         android:layout_width="81dp"
-        android:layout_height="40dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Book Price"
+        android:hint="@string/book_price"
         android:inputType="numberDecimal"
-        android:text="Qnt"
+        android:text="@string/qnt"
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -185,15 +188,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.141" />
 
-    <TextView
+    <EditText
         android:id="@+id/priceTV3"
         android:layout_width="119dp"
-        android:layout_height="41dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Book Price"
+        android:hint="@string/book_price"
         android:inputType="numberDecimal"
         android:textAlignment="center"
         android:textSize="20sp"
@@ -205,19 +208,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.142" />
 
-    <TextView
+    <EditText
         android:id="@+id/uploadTv"
         android:layout_width="127dp"
-        android:layout_height="37dp"
+        android:layout_height="53dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:hint="Book Price"
+        android:hint="@string/book_price"
         android:inputType="numberDecimal"
-        android:text="Upload Image"
+        android:text="@string/upload_image"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -228,6 +231,7 @@
 
     <EditText
         android:id="@+id/quantity"
+        android:hint="@string/Qnt"
         android:layout_width="60dp"
         android:layout_height="57dp"
         android:layout_marginBottom="8dp"
@@ -269,7 +273,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Add"
+        android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.247"
@@ -285,7 +289,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Upload "
+        android:text="@string/upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.965"
@@ -301,7 +305,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Clear"
+        android:text="@string/clear"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.765"
@@ -322,7 +326,8 @@
         app:layout_constraintHorizontal_bias="0.969"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.313" />
+        app:layout_constraintVertical_bias="0.313"
+        android:contentDescription="@string/todo" />
 
     <ListView
         android:id="@+id/listView"
@@ -338,7 +343,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.919" />
+        app:layout_constraintVertical_bias="0.919"
+        android:focusable="true" />
 
 
 </android.support.constraint.ConstraintLayout>

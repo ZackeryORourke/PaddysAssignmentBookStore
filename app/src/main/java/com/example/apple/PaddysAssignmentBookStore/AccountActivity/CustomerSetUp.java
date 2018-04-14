@@ -19,19 +19,20 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CustomerSetUp extends AppCompatActivity {
 
 
+    private Spinner mySpinner= findViewById(R.id.cardTypeSpinner);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_set_up);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        final EditText addressField = (EditText) findViewById(R.id.address);
-        final EditText dobField = (EditText) findViewById(R.id.dob);
-        final EditText paymentField = (EditText) findViewById(R.id.payment);
-        final Spinner mySpinner=(Spinner) findViewById(R.id.cardTypeSpinner);
-        Button submitButton= (Button) findViewById(R.id.buttonSubmit);
+        final EditText addressField = findViewById(R.id.address);
+        final EditText dobField = findViewById(R.id.dob);
+        final EditText paymentField = findViewById(R.id.payment);
+
+        Button submitButton= findViewById(R.id.buttonSubmit);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

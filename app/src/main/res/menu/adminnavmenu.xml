@@ -3,14 +3,31 @@
 
     <item
         android:id="@+id/addBook"
-        android:title="Add Book"
+        android:title="@string/add_book"
         />
 
 
     <item
         android:id="@+id/customerView"
-        android:title="Customer View"
+        android:title="@string/customer_view"
         />
+
+
+
+    <item
+        android:id="@+id/searchView"
+        android:title="@string/search_book"
+        />
+
+
+
+
+    <item
+        android:id="@+id/customersDetails"
+        android:title="@string/view_customer_details"
+        />
+
+
 
 
 </menu>

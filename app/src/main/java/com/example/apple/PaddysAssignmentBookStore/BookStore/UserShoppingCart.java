@@ -8,14 +8,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.apple.PaddysAssignment.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,15 +25,10 @@ public class UserShoppingCart extends AppCompatActivity {
     EditText titleText, authorText, priceText, quantityText;
     Button addButton, uploadImageButton, clearButton;
     TextView totalText;
-    private List<Catalogue> catalogueListItems = new ArrayList<Catalogue>();
+    private List<Catalogue> catalogueListItems = new ArrayList<>();
     DatabaseReference databaseCatalogue;
     private ListView listView;
-    private List<Catalogue> booksList = new ArrayList<>();
     private BookListAdapter adapter;
-    private ImageView imageView;
-    private FirebaseAuth mAuth;
-    private FirebaseUser fbUser;
-
 
 
 
@@ -45,27 +36,22 @@ public class UserShoppingCart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_shopping_cart);
-        listView = (ListView) findViewById(R.id.shoppingCartList);
-        titleText = (EditText) findViewById(R.id.addtitle);
-        quantityText = (EditText) findViewById(R.id.quantity);
-        authorText = (EditText) findViewById(R.id.addAuthor);
-        priceText = (EditText) findViewById(R.id.addPrice);
-        totalText = (TextView) findViewById(R.id.finalTotal);
-        addButton = (Button) findViewById(R.id.addBookButton);
-        clearButton= (Button)findViewById(R.id.clearBook);
-        uploadImageButton =(Button) findViewById(R.id.uploadBook);
+        listView = findViewById(R.id.shoppingCartList);
+        titleText = findViewById(R.id.addTitle);
+        quantityText = findViewById(R.id.quantity);
+        authorText = findViewById(R.id.addAuthor);
+        priceText = findViewById(R.id.addPrice);
+        totalText = findViewById(R.id.finalTotal);
+        addButton = findViewById(R.id.addBookButton);
+        clearButton= findViewById(R.id.clearBook);
+        uploadImageButton = findViewById(R.id.uploadBook);
         adapter = new BookListAdapter(this, catalogueListItems);
-        listView.setAdapter((ListAdapter) adapter);
-        imageView = (ImageView) findViewById(R.id.imgView);
+        listView.setAdapter(adapter);
         shoppingListFeed();
-        //totalText.setText(String.valueOf(totalPrice));
 
 
 
     }
-
-
-
 
 
 
@@ -82,8 +68,7 @@ public class UserShoppingCart extends AppCompatActivity {
                     String price = books.child("price").getValue(String.class);
 
                     int newIntValue = Integer.parseInt(price);
-                    int currentvalue= newIntValue;
-                    int totalPrice = currentvalue + newIntValue;
+                    int totalPrice = newIntValue + newIntValue;
 
                     //New data base reference for total to add the database
                     FirebaseDatabase database = FirebaseDatabase.getInstance();

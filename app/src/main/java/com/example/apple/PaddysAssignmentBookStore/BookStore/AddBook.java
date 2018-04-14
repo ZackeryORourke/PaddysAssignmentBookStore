@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -47,15 +46,13 @@ public class AddBook extends AppCompatActivity {
 
     EditText titleText, authorText, priceText, quantityText;
     Button addButton, uploadImageButton, clearButton;
-    private List<Catalogue> catalogueListItems = new ArrayList<Catalogue>();
+    private List<Catalogue> catalogueListItems = new ArrayList<>();
     DatabaseReference databaseCatalogue;
     private ListView listView;
-    private List<Catalogue> booksList = new ArrayList<>();
-    private BookListAdapter adapter;
+    BookListAdapter adapter;
     private ImageView imageView;
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 71;
-    private String downloadUrl;
 
 
 
@@ -65,29 +62,29 @@ public class AddBook extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_book);
-        listView = (ListView) findViewById(R.id.listView);
+        listView = findViewById(R.id.listView);
         databaseCatalogue = FirebaseDatabase.getInstance().getReference("catalogues");
-        titleText = (EditText) findViewById(R.id.addtitle);
-        quantityText = (EditText) findViewById(R.id.quantity);
-        authorText = (EditText) findViewById(R.id.addAuthor);
-        priceText = (EditText) findViewById(R.id.addPrice);
-        addButton = (Button) findViewById(R.id.addBookButton);
-        clearButton= (Button)findViewById(R.id.clearBook);
-        uploadImageButton =(Button) findViewById(R.id.uploadBook);
+        titleText = findViewById(R.id.addTitle);
+        quantityText = findViewById(R.id.quantity);
+        authorText = findViewById(R.id.addAuthor);
+        priceText = findViewById(R.id.addPrice);
+        addButton = findViewById(R.id.addBookButton);
+        clearButton= findViewById(R.id.clearBook);
+        uploadImageButton = findViewById(R.id.uploadBook);
         adapter = new BookListAdapter(this, catalogueListItems);
-        listView.setAdapter((ListAdapter) adapter);
+        listView.setAdapter(adapter);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 addBook();
             }
         });
-        imageView = (ImageView) findViewById(R.id.imgView);
+        imageView = findViewById(R.id.imgView);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Catalogue catalogue = catalogueListItems.get(i);
-                showUpdateDialog(catalogue.getTitle(),catalogue.getAuthor(),catalogue.getPrice());
+                showUpdateDialog(catalogue.getTitle());
 
                 return false;
             }
@@ -169,7 +166,7 @@ public class AddBook extends AppCompatActivity {
 
     }
 
-    private void showUpdateDialog(final String bookId, final String bookName, final String bookAuthor){
+    private void showUpdateDialog(final String bookId){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);//pass the current context
         LayoutInflater layoutInflater = getLayoutInflater();
         final View dialogView = layoutInflater.inflate(R.layout.updatedialog,null);
@@ -177,14 +174,14 @@ public class AddBook extends AppCompatActivity {
 
 
 
-        final EditText editText= (EditText) dialogView.findViewById(R.id.editTextName);
-        final EditText editText1= (EditText) dialogView.findViewById(R.id.editTextAuthor);
-        final EditText editText2= (EditText) dialogView.findViewById(R.id.editTextPrice);
-        final EditText editText3= (EditText) dialogView.findViewById(R.id.updateQuantity);
-        final EditText editText4= (EditText) dialogView.findViewById(R.id.updateCategory);
-        final Button  buttonUpdate= (Button) dialogView.findViewById(R.id.buttonUpdate);
-        final Button  buttonDelete= (Button) dialogView.findViewById(R.id.buttonDelete);
-        final Button uploadButton = (Button) dialogView.findViewById(R.id.buttonUpdateImage);
+        final EditText editText= dialogView.findViewById(R.id.editTextName);
+        final EditText editText1= dialogView.findViewById(R.id.editTextAuthor);
+        final EditText editText2= dialogView.findViewById(R.id.editTextPrice);
+        final EditText editText3= dialogView.findViewById(R.id.updateQuantity);
+        final EditText editText4= dialogView.findViewById(R.id.updateCategory);
+        final Button  buttonUpdate= dialogView.findViewById(R.id.buttonUpdate);
+        final Button  buttonDelete= dialogView.findViewById(R.id.buttonDelete);
+        final Button uploadButton = dialogView.findViewById(R.id.buttonUpdateImage);
         dialogBuilder.setTitle("Updating Book" + bookId);
 
 
@@ -263,13 +260,12 @@ public class AddBook extends AppCompatActivity {
     }
 
 
-    private boolean updateCatalogue(String bookId, String bookName, String bookAuthor, String bookPrice,String bookQuantity, String bookCategory,String imageLocation){
+    private void updateCatalogue(String bookId, String bookName, String bookAuthor, String bookPrice, String bookQuantity, String bookCategory, String imageLocation){
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("catalogues").child(bookId);
         Catalogue catalogue = new Catalogue(bookId,bookName,bookAuthor,bookPrice, bookQuantity, bookCategory,imageLocation);
         updateImage();
         databaseReference.setValue(catalogue);
         Toast.makeText(this,"Book Updated Successfully",Toast.LENGTH_LONG).show();
-        return true;
 
     }
 
@@ -289,15 +285,14 @@ public class AddBook extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
-                            filePath=downloadUri;
+                            filePath= taskSnapshot.getDownloadUrl();
                             String id = titleText.getText().toString().trim();
                             String title = titleText.getText().toString().trim();
                             String author = authorText.getText().toString().trim();
                             String price = priceText.getText().toString().trim();
                             String quantity = quantityText.getText().toString().trim();
                             String imageLocation = filePath.toString();
-                            final Spinner mySpinner=(Spinner) findViewById(R.id.topicSpinner);
+                            final Spinner mySpinner= findViewById(R.id.topicSpinner);
                             String topicSpinner = mySpinner.getSelectedItem().toString();
                             if(!TextUtils.isEmpty(title)&!TextUtils.isEmpty(author)&!TextUtils.isEmpty(price)){
                                 Catalogue catalogue = new Catalogue(id,title,author,price,quantity,topicSpinner,imageLocation);
@@ -348,8 +343,7 @@ public class AddBook extends AppCompatActivity {
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Uri downloadUri = taskSnapshot.getDownloadUrl();
-                            filePath = downloadUri;
+                            filePath = taskSnapshot.getDownloadUrl();
 
 
                             progressDialog.dismiss();

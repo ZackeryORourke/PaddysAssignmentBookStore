@@ -12,25 +12,18 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import com.example.apple.PaddysAssignmentBookStore.LoginActivity;
 import com.example.apple.PaddysAssignment.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class Login extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
-    private Button btnSignup, btnLogin, btnReset;
     Switch switch1;
     boolean switched;
 
@@ -41,9 +34,10 @@ public class Login extends AppCompatActivity implements CompoundButton.OnChecked
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login2);
+        Button btnSignup, btnLogin, btnReset;
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
-        switch1 = (Switch) findViewById(R.id.accountType);
+        switch1 = findViewById(R.id.accountType);
         switch1.setOnCheckedChangeListener(this);
         if (switch1 != null) {
             switch1.setOnCheckedChangeListener(this);
@@ -56,12 +50,12 @@ public class Login extends AppCompatActivity implements CompoundButton.OnChecked
         }
 
         setContentView(R.layout.activity_login2);
-        inputEmail = (EditText) findViewById(R.id.email);
-        inputPassword = (EditText) findViewById(R.id.password);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnSignup = (Button) findViewById(R.id.btn_signup);
-        btnLogin = (Button) findViewById(R.id.btn_login);
-        btnReset = (Button) findViewById(R.id.btn_reset_password);
+        inputEmail = findViewById(R.id.email);
+        inputPassword = findViewById(R.id.password);
+        progressBar = findViewById(R.id.progressBar);
+        btnSignup = findViewById(R.id.btn_signup);
+        btnLogin = findViewById(R.id.btn_login);
+        btnReset = findViewById(R.id.btn_reset_password);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -118,21 +112,12 @@ public class Login extends AppCompatActivity implements CompoundButton.OnChecked
                                         Toast.makeText(Login.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    if(switched=true){
-                                        Intent intent = new Intent(Login.this,CustomerSetUp.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }else
                                     {
                                         Intent intent = new Intent(Login.this,CustomerSetUp.class);
                                         startActivity(intent);
                                         finish();
-
-
                                     }
-//                                   Intent intent = new Intent(Login.this,CustomerSetUp.class);
-//                                   startActivity(intent);
-//                                   finish();
+
 
                                 }
                             }
@@ -144,12 +129,7 @@ public class Login extends AppCompatActivity implements CompoundButton.OnChecked
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        if(switch1.isChecked()){
-            switched = true;
-        }
-        else{
-            switched= false;
-        }
+        switched = switch1.isChecked();
 
     }
 }

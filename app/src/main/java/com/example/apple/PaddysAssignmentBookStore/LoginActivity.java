@@ -19,7 +19,9 @@ import com.example.apple.PaddysAssignment.R;
 import com.example.apple.PaddysAssignmentBookStore.AccountActivity.Login;
 import com.example.apple.PaddysAssignmentBookStore.AccountActivity.MainFeed;
 import com.example.apple.PaddysAssignmentBookStore.AccountActivity.RegisterActivity;
+import com.example.apple.PaddysAssignmentBookStore.AccountActivity.ViewCustomersDetails;
 import com.example.apple.PaddysAssignmentBookStore.BookStore.AddBook;
+import com.example.apple.PaddysAssignmentBookStore.BookStore.SearchBook;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 //get firebase auth instance
         auth = FirebaseAuth.getInstance();
-        email = (TextView) findViewById(R.id.useremail);
+        email = findViewById(R.id.useremail);
 
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -62,19 +64,19 @@ public class LoginActivity extends AppCompatActivity {
         };
 
 
-        btnChangePassword = (Button) findViewById(R.id.change_password_button);
+        btnChangePassword = findViewById(R.id.change_password_button);
 
-        btnRemoveUser = (Button) findViewById(R.id.remove_user_button);
+        btnRemoveUser = findViewById(R.id.remove_user_button);
 
-        changePassword = (Button) findViewById(R.id.changePass);
+        changePassword = findViewById(R.id.changePass);
 
-        remove = (Button) findViewById(R.id.remove);
-        signOut = (Button) findViewById(R.id.sign_out);
+        remove = findViewById(R.id.remove);
+        signOut = findViewById(R.id.sign_out);
 
-        oldEmail = (EditText) findViewById(R.id.old_email);
+        oldEmail = findViewById(R.id.old_email);
 
-        password = (EditText) findViewById(R.id.password);
-        newPassword = (EditText) findViewById(R.id.newPassword);
+        password = findViewById(R.id.password);
+        newPassword = findViewById(R.id.newPassword);
 
         oldEmail.setVisibility(View.GONE);
 
@@ -85,7 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
         remove.setVisibility(View.GONE);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         if (progressBar != null) {
             progressBar.setVisibility(View.GONE);
@@ -244,6 +246,19 @@ public class LoginActivity extends AppCompatActivity {
                 Intent customerView = new Intent(this, MainFeed.class);
                 this.startActivity(customerView);
                 return true;
+
+            case R.id.searchView:
+                Intent search = new Intent(this, SearchBook.class);
+                this.startActivity(search);
+                return true;
+
+            case R.id.customersDetails:
+                Intent viewCustomerDetails = new Intent(this, ViewCustomersDetails.class);
+                this.startActivity(viewCustomerDetails);
+                return true;
+
+
+
 
 
 

@@ -9,7 +9,6 @@ import android.view.MenuItem;
 
 import com.example.apple.PaddysAssignment.R;
 import com.example.apple.PaddysAssignmentBookStore.BookStore.AddBook;
-import com.example.apple.PaddysAssignmentBookStore.LoginActivity;
 
 public class AdminMenu extends AppCompatActivity {
 
