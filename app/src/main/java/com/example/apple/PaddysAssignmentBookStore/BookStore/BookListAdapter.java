@@ -1,6 +1,4 @@
 package com.example.apple.PaddysAssignmentBookStore.BookStore;
-
-
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -11,13 +9,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.example.apple.PaddysAssignment.R;
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
-
 public class BookListAdapter extends ArrayAdapter<Catalogue>{
 
     private Activity activity;
@@ -49,13 +43,13 @@ public class BookListAdapter extends ArrayAdapter<Catalogue>{
 
 
 
-        TextView textViewTitle = (TextView) convertView.findViewById(R.id.listViewTitle);
-        TextView textViewAuthor = (TextView) convertView.findViewById(R.id.listViewAuthor);
-        TextView textViewPrice = (TextView) convertView.findViewById(R.id.listViewPrice);
-        TextView textViewQuantity = (TextView) convertView.findViewById(R.id.listViewQnt);
-        TextView textViewCategory= (TextView) convertView.findViewById(R.id.listViewCategory);
+        TextView textViewTitle = convertView.findViewById(R.id.listViewTitle);
+        TextView textViewAuthor = convertView.findViewById(R.id.listViewAuthor);
+        TextView textViewPrice = convertView.findViewById(R.id.listViewPrice);
+        TextView textViewQuantity = convertView.findViewById(R.id.listViewQnt);
+        TextView textViewCategory= convertView.findViewById(R.id.listViewCategory);
         Catalogue catalogue = catalogueList.get(position);
-        ImageView imageView = (ImageView) convertView.findViewById(R.id.bookImageView);
+        ImageView imageView = convertView.findViewById(R.id.bookImageView);
 
         String url = (catalogue.getImageUrl());
         Glide.with(activity)

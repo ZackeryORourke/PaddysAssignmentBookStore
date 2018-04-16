@@ -19,7 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Login extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class Login extends AppCompatActivity  {
 
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
@@ -38,10 +38,7 @@ public class Login extends AppCompatActivity implements CompoundButton.OnChecked
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
         switch1 = findViewById(R.id.accountType);
-        switch1.setOnCheckedChangeListener(this);
-        if (switch1 != null) {
-            switch1.setOnCheckedChangeListener(this);
-        }
+
 
 
         if (auth.getCurrentUser() != null) {
@@ -113,9 +110,7 @@ public class Login extends AppCompatActivity implements CompoundButton.OnChecked
                                     }
                                 } else {
                                     {
-                                        Intent intent = new Intent(Login.this,CustomerSetUp.class);
-                                        startActivity(intent);
-                                        finish();
+                                       checkIfUserIdAdmin();
                                     }
 
 
@@ -127,9 +122,27 @@ public class Login extends AppCompatActivity implements CompoundButton.OnChecked
     }
 
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        switched = switch1.isChecked();
+    public void checkIfUserIdAdmin(){
+        String email = String.valueOf(inputEmail.getText());
+
+
+        if(email.equals("administrator@admin.com")){
+            adminIntent();
+        }
+        else {
+            userIntent();
+        }
+    }
+
+    public void adminIntent(){
+        Intent adminIntent = new Intent(Login.this, Login.class);
+        startActivity(adminIntent);
+    }
+
+    public void userIntent(){
+        Intent userIntent = new Intent(Login.this, CustomerSetUp.class);
+        startActivity(userIntent);
 
     }
+
 }

@@ -19,7 +19,6 @@ import com.google.firebase.database.FirebaseDatabase;
 public class CustomerSetUp extends AppCompatActivity {
 
 
-    private Spinner mySpinner= findViewById(R.id.cardTypeSpinner);
 
 
     @Override
@@ -31,6 +30,7 @@ public class CustomerSetUp extends AppCompatActivity {
         final EditText addressField = findViewById(R.id.address);
         final EditText dobField = findViewById(R.id.dob);
         final EditText paymentField = findViewById(R.id.payment);
+        final Spinner mySpinner= findViewById(R.id.cardTypeSpinner);
 
         Button submitButton= findViewById(R.id.buttonSubmit);
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -41,7 +41,7 @@ public class CustomerSetUp extends AppCompatActivity {
                 String payment     =  paymentField.getText().toString();
                 String cardTypeSpinner = mySpinner.getSelectedItem().toString();
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("CustomerInformation" + FirebaseAuth.getInstance().getUid());
+                DatabaseReference myRef = database.getReference("CustomerInformation").child(FirebaseAuth.getInstance().getUid());
                 myRef.setValue(address+dob+ payment+cardTypeSpinner);
                 startActivity(new Intent(CustomerSetUp.this, MainFeed.class));
             }

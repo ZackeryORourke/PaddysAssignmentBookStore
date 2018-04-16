@@ -57,19 +57,7 @@ public class SearchBook extends AppCompatActivity {
         searchAuthor= (Button) findViewById(R.id.sortAuthor);
         searchPrice= (Button) findViewById(R.id.sortPrice);
 
-//        searchTitle.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Collections.sort(titleList, new Comparator<Titlea>() {
-//                    @Override
-//                    public int compare(Catalogue catalogue, catalgoue c) {
-//                        return catalogue.getTitle().compareTo(c.getTitle());
-//                    }
-//                });
-//
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
+
 
         searchTextField.addTextChangedListener(new TextWatcher() {
             @Override

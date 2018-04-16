@@ -3,6 +3,7 @@ package com.example.apple.PaddysAssignmentBookStore.BookStore;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -26,8 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 public class UserShoppingCart extends AppCompatActivity {
 
-
-
     Button purchaseButton;
     TextView totalText;
     private List<Catalogue> catalogueListItems = new ArrayList<>();
@@ -35,15 +34,14 @@ public class UserShoppingCart extends AppCompatActivity {
     private ListView listView;
     private BookListAdapter adapter;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_shopping_cart);
         listView = findViewById(R.id.shoppingCartList);
         purchaseButton= findViewById(R.id.purchaseButton);
+        totalText = findViewById(R.id.finalTotal);
+        totalText.setText("100");
         adapter = new BookListAdapter(this, catalogueListItems);
         listView.setAdapter(adapter);
         shoppingListFeed();
@@ -66,6 +64,8 @@ public class UserShoppingCart extends AppCompatActivity {
 
 
                 backToFeed();
+
+
 
 
 
@@ -100,6 +100,7 @@ public class UserShoppingCart extends AppCompatActivity {
 
         String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
         databaseCatalogue = FirebaseDatabase.getInstance().getReference("shoppingCart").child(user);
+
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -107,13 +108,9 @@ public class UserShoppingCart extends AppCompatActivity {
                    Catalogue catalogue = books.getValue(Catalogue.class);
                     String price = books.child("price").getValue(String.class);
 
-                    int newIntValue = Integer.parseInt(price);
-                    int totalPrice = newIntValue + newIntValue;
 
-                    //New data base reference for total to add the database
-                    FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference myRef = database.getReference("CustomerTotal" + FirebaseAuth.getInstance().getUid());
-                    myRef.setValue(totalPrice);
+                    int newIntValue = Integer.parseInt(price);
+
                     //Setting the list of items to the adapter
                     catalogueListItems.add(catalogue);
                     listView.setAdapter(adapter);
@@ -160,6 +157,7 @@ public class UserShoppingCart extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
 
 

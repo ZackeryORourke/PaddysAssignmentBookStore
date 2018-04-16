@@ -36,7 +36,7 @@ public class ViewCustomersDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.customersdetails);
-        listView = findViewById(id.customerList);
+        ListView listView = findViewById(R.id.customersList);
         adapter = new CustomerListAdapter(this, customerModelList);
         listView.setAdapter(adapter);
 
@@ -51,7 +51,8 @@ public class ViewCustomersDetails extends AppCompatActivity {
     public void mainFeed(){
 
              FirebaseDatabase database = FirebaseDatabase.getInstance();
-             databaseCatalogue = database.getReference("CustomerInformation" + FirebaseAuth.getInstance().getUid());
+             databaseCatalogue = database.getReference("CustomerInformation").child(FirebaseAuth.getInstance().getUid());
+
 
         ValueEventListener valueEventListener = new ValueEventListener() {
             @Override

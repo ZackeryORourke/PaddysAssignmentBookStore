@@ -166,14 +166,12 @@ public class AddBook extends AppCompatActivity {
 
     }
 
+    //Builder pattern
     private void showUpdateDialog(final String bookId){
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);//pass the current context
         LayoutInflater layoutInflater = getLayoutInflater();
         final View dialogView = layoutInflater.inflate(R.layout.updatedialog,null);
         dialogBuilder.setView(dialogView);
-
-
-
         final EditText editText= dialogView.findViewById(R.id.editTextName);
         final EditText editText1= dialogView.findViewById(R.id.editTextAuthor);
         final EditText editText2= dialogView.findViewById(R.id.editTextPrice);

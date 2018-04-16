@@ -25,7 +25,6 @@
             android:name="com.example.apple.PaddysAssignmentBookStore.AccountActivity.CustomerSetUp"
             android:label="@string/title_activity_customer_set_up"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name="com.example.apple.PaddysAssignmentBookStore.AccountActivity.AdminMenu" />
         <activity android:name="com.example.apple.PaddysAssignmentBookStore.AccountActivity.MainFeed" />
         <activity android:name="com.example.apple.PaddysAssignmentBookStore.BookStore.AddBook" />
         <activity android:name="com.example.apple.PaddysAssignmentBookStore.BookStore.CustomerIndex" />
